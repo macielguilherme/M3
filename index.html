@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3 Imports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --accent: #ffffff;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --search-bg: rgba(255, 255, 255, 0.08);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            height: 200vh;
+        }
+
+        .m3-header {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-container-left {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .brand-logo {
+            height: 30px;
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.03);
+            opacity: 0.9;
+        }
+
+        .main-menu {
+            display: flex;
+            gap: 32px;
+        }
+
+        .main-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .main-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .main-menu a:hover {
+            color: var(--accent);
+        }
+
+        .main-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-container-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 10px 22px;
+            border-radius: 50px;
+            background: var(--search-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .search-wrapper:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .search-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .icon-link {
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .icon-link:hover {
+            opacity: 0.7;
+            transform: translateY(-1px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--accent);
+            color: #000;
+            font-size: 9px;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+
+        /* Checkbox escondido para controlar o menu mobile */
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            color: var(--accent);
+        }
+
+        @media (max-width: 992px) {
+            .m3-header { 
+                height: 70px; 
+                padding: 0 20px; 
+            }
+
+            .menu-icon {
+                display: block;
+                order: -1; /* Coloca o hambúrguer na esquerda */
+            }
+
+            .nav-container-left {
+                gap: 15px;
+            }
+
+            /* Menu Lateral Mobile */
+            .main-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: #000;
+                flex-direction: column;
+                padding: 40px;
+                gap: 25px;
+                transition: var(--transition);
+                border-right: 1px solid var(--border-color);
+            }
+
+            /* Mostrar menu quando checkbox estiver marcado */
+            #menu-toggle:checked ~ .nav-container-left .main-menu {
+                left: 0;
+            }
+
+            .main-menu a {
+                font-size: 14px;
+                width: 100%;
+            }
+
+            .search-label, .icon-link:nth-of-type(1) { 
+                display: none; /* Esconde texto 'buscar' e ícone user no mobile para dar espaço */
+            }
+
+            .search-wrapper { 
+                padding: 10px;
+                background: transparent;
+                border: none;
+            }
+            
+            .nav-container-right {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="m3-header">
+        <input type="checkbox" id="menu-toggle">
+        
+        <div class="nav-container-left">
+            <label for="menu-toggle" class="menu-icon">
+                <i data-lucide="menu" size="24"></i>
+            </label>
+
+            <a href="/">
+                <img src="https://lojam3imports.com.br/cdn/shop/files/LOGO_1_81780365-8e04-4363-8d18-177f5464d2f4.png?v=1752677434&width=150" 
+                     alt="M3 Imports Logo" 
+                     class="brand-logo">
+            </a>
+            
+            <nav class="main-menu">
+                <a href="#">Início</a>
+                <a href="#">Masculino</a>
+                <a href="#">Feminino</a>
+                <a href="#">Lançamentos</a>
+                <a href="#">Outlet</a>
+            </nav>
+        </div>
+
+        <div class="nav-container-right">
+            <div class="search-wrapper">
+                <i data-lucide="search" size="18" stroke-width="1.5"></i>
+                <span class="search-label">BUSCAR</span>
+            </div>
+            
+            <div class="icon-link">
+                <i data-lucide="user" size="20" stroke-width="1.5"></i>
+            </div>
+            
+            <div class="icon-link">
+                <i data-lucide="shopping-bag" size="20" stroke-width="1.5"></i>
+                <span class="cart-badge">0</span>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
