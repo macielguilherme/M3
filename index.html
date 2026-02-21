@@ -25,7 +25,7 @@
 
         body {
             background-color: #0a0a0a;
-            height: 200vh; /* Apenas para teste de scroll */
+            height: 200vh;
         }
 
         .m3-header {
@@ -57,6 +57,11 @@
             transition: var(--transition);
         }
 
+        .brand-logo:hover {
+            transform: scale(1.03);
+            opacity: 0.9;
+        }
+
         .main-menu {
             display: flex;
             gap: 32px;
@@ -74,8 +79,23 @@
             padding: 8px 0;
         }
 
+        .main-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
         .main-menu a:hover {
             color: var(--accent);
+        }
+
+        .main-menu a:hover::after {
+            width: 100%;
         }
 
         .nav-container-right {
@@ -96,17 +116,38 @@
             transition: var(--transition);
         }
 
+        .search-wrapper:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .search-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
         .icon-link {
             color: var(--accent);
+            text-decoration: none; /* Garante que o link não tenha sublinhado */
             display: flex;
             align-items: center;
-            position: relative;
+            justify-content: center;
             cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .icon-link:hover {
+            opacity: 0.7;
+            transform: translateY(-1px);
         }
 
         .cart-badge {
             position: absolute;
-            top: -8px;
+            top: -10px;
             right: -10px;
             background: var(--accent);
             color: #000;
@@ -120,51 +161,69 @@
             justify-content: center;
         }
 
-        /* --- BOTÃO WHATSAPP --- */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: var(--accent); /* Branco para manter a paleta */
-            color: #000; /* Ícone preto */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            z-index: 999;
-            transition: var(--transition);
-            text-decoration: none;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1) translateY(-5px);
-            background-color: #f0f0f0;
-        }
-
         /* --- RESPONSIVIDADE --- */
-        #menu-toggle { display: none; }
-        .menu-icon { display: none; cursor: pointer; color: var(--accent); }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            color: var(--accent);
+        }
 
         @media (max-width: 992px) {
-            .m3-header { height: 70px; padding: 0 20px; }
-            .menu-icon { display: block; order: -1; }
-            .main-menu {
-                position: fixed; top: 70px; left: -100%; width: 80%; height: 100vh;
-                background: #000; flex-direction: column; padding: 40px; transition: var(--transition);
+            .m3-header { 
+                height: 70px; 
+                padding: 0 20px; 
             }
-            #menu-toggle:checked ~ .nav-container-left .main-menu { left: 0; }
-            .search-label, .icon-link:nth-of-type(1) { display: none; }
-            .search-wrapper { background: transparent; border: none; padding: 10px; }
+
+            .menu-icon {
+                display: block;
+                order: -1;
+            }
+
+            .nav-container-left {
+                gap: 15px;
+            }
+
+            .main-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: #000;
+                flex-direction: column;
+                padding: 40px;
+                gap: 25px;
+                transition: var(--transition);
+                border-right: 1px solid var(--border-color);
+            }
+
+            #menu-toggle:checked ~ .nav-container-left .main-menu {
+                left: 0;
+            }
+
+            .main-menu a {
+                font-size: 14px;
+                width: 100%;
+            }
+
+            /* No mobile, mantemos o WhatsApp visível por ser conversão direta */
+            .search-label, .icon-link:nth-of-type(1) { 
+                display: none; 
+            }
+
+            .search-wrapper { 
+                padding: 10px;
+                background: transparent;
+                border: none;
+            }
             
-            /* Ajuste do botão para mobile para não cobrir conteúdo importante */
-            .whatsapp-float {
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
+            .nav-container-right {
+                gap: 15px;
             }
         }
     </style>
@@ -200,6 +259,10 @@
                 <span class="search-label">BUSCAR</span>
             </div>
             
+            <a href="https://api.whatsapp.com/send?phone=5561993512764" target="_blank" class="icon-link">
+                <i data-lucide="message-circle" size="20" stroke-width="1.5"></i>
+            </a>
+
             <div class="icon-link">
                 <i data-lucide="user" size="20" stroke-width="1.5"></i>
             </div>
@@ -210,10 +273,6 @@
             </div>
         </div>
     </header>
-
-    <a href="https://api.whatsapp.com/send?phone=5561993512764" class="whatsapp-float" target="_blank">
-        <i data-lucide="message-circle" size="28" stroke-width="2"></i>
-    </a>
 
     <script>
         lucide.createIcons();
