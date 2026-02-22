@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>M3 Imports | Catálogo Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -829,7 +829,7 @@
             width: 100%;
         }
 
-        /* Layouts - preenchendo toda largura */
+        /* Layouts - Desktop */
         .products-grid.large {
             grid-template-columns: repeat(4, 1fr);
         }
@@ -975,16 +975,16 @@
             border-color: #fff;
         }
 
-        /* --- RESPONSIVIDADE MOBILE CORRIGIDA --- */
+        /* --- RESPONSIVIDADE MOBILE CORRIGIDA - 1, 2 e 3 colunas --- */
         @media (max-width: 1200px) {
             .products-grid.large {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(3, 1fr) !important;
             }
             .products-grid.medium {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(4, 1fr) !important;
             }
             .products-grid.compact {
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(5, 1fr) !important;
             }
         }
 
@@ -1142,82 +1142,52 @@
                 border: 1px solid var(--border-color);
             }
 
-            .products-grid.large {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .products-grid.medium {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .products-grid.large,
+            .products-grid.medium,
             .products-grid.compact {
-                grid-template-columns: repeat(3, 1fr);
+                gap: 12px !important;
             }
         }
 
-        @media (max-width: 600px) {
-            .left-controls {
-                flex-wrap: nowrap;
-            }
-            
-            .filter-button,
-            .sort-button {
-                padding: 12px 8px;
-                font-size: 12px;
-            }
-            
-            .filter-button svg,
-            .sort-button svg {
-                width: 14px;
-                height: 14px;
-            }
-
-            /* CORREÇÃO: Agora respeita a classe escolhida */
+        @media (max-width: 768px) {
             .products-grid.large {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            .products-grid.medium {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            .products-grid.compact {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-            }
-
-            .product-title {
-                font-size: 12px;
-            }
-
-            .product-price {
-                font-size: 14px;
-            }
-
-            .layout-btn {
-                width: 42px;
-                height: 42px;
+                grid-template-columns: repeat(2, 1fr) !important;
             }
             
-            .layout-btn svg {
-                width: 20px;
-                height: 20px;
+            .products-grid.medium {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .products-grid.compact {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid.large {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .products-grid.medium {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .products-grid.compact {
+                grid-template-columns: repeat(3, 1fr) !important;
             }
         }
 
         @media (max-width: 380px) {
-            .left-controls {
-                flex-wrap: wrap;
+            .products-grid.large {
+                grid-template-columns: 1fr !important;
             }
             
-            .filter-button,
-            .sort-button {
-                width: 100%;
+            .products-grid.medium {
+                grid-template-columns: 1fr !important;
             }
             
-            /* Apenas em telas muito pequenas */
-            .products-grid.large,
-            .products-grid.medium,
             .products-grid.compact {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr) !important;
             }
         }
 
@@ -1469,13 +1439,13 @@
             </div>
 
             <div class="layout-controls">
-                <button class="layout-btn" data-layout="large" title="Imagens grandes">
+                <button class="layout-btn" data-layout="large" title="1 coluna (celular) / 4 colunas (desktop)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grid"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M3 9h18"></path><path d="M3 15h18"></path><path d="M9 3v18"></path><path d="M15 3v18"></path></svg>
                 </button>
-                <button class="layout-btn" data-layout="medium" title="Imagens médias">
+                <button class="layout-btn" data-layout="medium" title="2 colunas (celular) / 5 colunas (desktop)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square"><rect width="18" height="18" x="3" y="3" rx="2"></rect></svg>
                 </button>
-                <button class="layout-btn active" data-layout="compact" title="Layout compacto">
+                <button class="layout-btn active" data-layout="compact" title="3 colunas (celular) / 6 colunas (desktop)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list"><path d="M3 5h.01"></path><path d="M3 12h.01"></path><path d="M3 19h.01"></path><path d="M8 5h13"></path><path d="M8 12h13"></path><path d="M8 19h13"></path></svg>
                 </button>
             </div>
@@ -1561,7 +1531,7 @@
     <script>
         lucide.createIcons();
 
-        // Banco de dados de produtos
+        // Banco de dados de produtos com caminho correto das imagens
         const products = [
             // Freeway
             { name: "Tênis Freeway Duo 08 - 3981 - Masculino", brand: "Freeway", collection: "Freeway", price: 179, color: "Preto", sizes: [38, 39, 40, 41, 42], image: "img/imagens_produtos/tenis_freeway_duo_08_3981_masculino.jpg" },
@@ -1656,6 +1626,10 @@
             { size: 44, units: 45 }
         ];
 
+        // Variáveis globais
+        let filteredProducts = [...products];
+        let currentLayout = 'large';
+
         // Inicializar dropdowns
         function initDropdowns() {
             // Coleções
@@ -1733,29 +1707,22 @@
             const categoryNameSpan = document.getElementById('selectedCategoryName');
 
             if (categoryId === 'calcados') {
-                // Mostra filtros e grid de calçados
                 filterSidebar.classList.add('visible');
                 productsGrid.classList.remove('hidden');
                 otherMessage.classList.add('hidden');
                 
-                // Atualiza contador
-                document.getElementById('productCount').textContent = products.length + ' produtos';
-                
-                // Renderiza produtos
+                document.getElementById('productCount').textContent = filteredProducts.length + ' produtos';
                 filterProducts();
             } else {
-                // Esconde filtros e grid, mostra mensagem
                 filterSidebar.classList.remove('visible');
                 productsGrid.classList.add('hidden');
                 otherMessage.classList.remove('hidden');
                 
-                // Atualiza nome da categoria na mensagem
                 let categoryName = 'Vestuário';
                 if (categoryId === 'perfumaria') categoryName = 'Perfumaria';
                 if (categoryId === 'acessorios') categoryName = 'Acessórios';
                 categoryNameSpan.textContent = categoryName;
                 
-                // Zera contador
                 document.getElementById('productCount').textContent = '0 produtos';
             }
         }
@@ -1816,18 +1783,30 @@
             });
         });
 
-        // Layout buttons - CORRIGIDO
+        // Layout buttons - CORRIGIDO E FUNCIONAL
         document.querySelectorAll('.layout-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                // Remove active de todos
-                document.querySelectorAll('.layout-btn').forEach(b => b.classList.remove('active'));
-                // Adiciona active no clicado
-                this.classList.add('active');
-
+                
+                // Pega o layout atual e o novo
                 const grid = document.getElementById('productsGrid');
-                const layout = this.dataset.layout;
-                grid.className = 'products-grid ' + layout;
+                const newLayout = this.dataset.layout;
+                
+                // Atualiza a classe ativa dos botões
+                document.querySelectorAll('.layout-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Remove todas as classes de layout
+                grid.classList.remove('large', 'medium', 'compact');
+                
+                // Adiciona a nova classe
+                grid.classList.add(newLayout);
+                
+                // Atualiza a variável global
+                currentLayout = newLayout;
+                
+                // Força re-render para garantir
+                renderProducts(filteredProducts);
             });
         });
 
@@ -1881,9 +1860,6 @@
             filterProducts();
         });
 
-        // Estado dos filtros
-        let filteredProducts = [...products];
-
         // Função de filtro
         function filterProducts() {
             const selectedCollection = document.querySelector('.collection-link.selected')?.dataset.collection;
@@ -1903,9 +1879,17 @@
             renderProducts(filteredProducts);
         }
 
-        // Renderizar produtos
+        // Renderizar produtos - MANTÉM O LAYOUT ATUAL
         function renderProducts(productsToRender) {
             const grid = document.getElementById('productsGrid');
+            
+            // Preserva a classe de layout atual
+            const currentLayoutClass = currentLayout;
+            
+            // Remove todas as classes de layout e adiciona a atual
+            grid.className = 'products-grid ' + currentLayoutClass;
+            
+            // Renderiza os produtos
             grid.innerHTML = productsToRender.map(p => `
                 <div class="product-card">
                     <img src="${p.image}" alt="${p.name}" class="product-image" onerror="this.src='https://via.placeholder.com/300x300?text=${p.brand}'">
@@ -1928,6 +1912,13 @@
             if (window.innerWidth <= 992) {
                 document.getElementById('filterSidebar').classList.toggle('visible');
             }
+        });
+
+        // Força o layout inicial correto
+        window.addEventListener('load', function() {
+            const grid = document.getElementById('productsGrid');
+            grid.classList.add('large');
+            currentLayout = 'large';
         });
     </script>
 </body>
