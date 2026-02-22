@@ -26,8 +26,6 @@
             --accent: #FFFFFF;
             --accent-glow: rgba(255, 255, 255, 0.1);
             --transition-smooth: all 0.3s ease;
-            --disabled-opacity: 0.5;
-            --disabled-cursor: not-allowed;
         }
 
         body {
@@ -395,98 +393,119 @@
             transform: scale(1.1);
         }
 
-        /* --- COLLECTION TOOLBAR - MOBILE NA MESMA LINHA --- */
+        /* --- COLLECTION TOOLBAR - TUDO NA MESMA LINHA --- */
         .collection-toolbar {
             max-width: 1400px;
-            margin: 40px auto 24px;
+            margin: 20px auto 24px;
             padding: 0 5%;
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            flex-wrap: wrap;
-            gap: 8px;
+            gap: 20px;
         }
 
         .toolbar-left {
             display: flex;
             align-items: center;
-            gap: 8px;
-            flex: 1;
-            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: nowrap;
         }
 
         .filter-btn, .sort-btn {
             background: var(--bg-secondary);
             border: 1px solid var(--border-light);
             color: var(--text-secondary);
-            padding: 12px 16px;
+            padding: 12px 24px;
             font-size: 14px;
+            font-weight: 500;
             border-radius: 40px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             transition: var(--transition-smooth);
-            flex: 1;
-            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             white-space: nowrap;
+        }
+
+        .filter-btn svg, .sort-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
         }
 
         .filter-btn:hover, .sort-btn:hover {
             background: var(--bg-elevated);
             border-color: var(--border-hover);
             color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-btn:active, .sort-btn:active {
+            transform: translateY(0);
         }
 
         .product-count {
             color: var(--text-tertiary);
             font-size: 14px;
             font-weight: 400;
-            margin-left: 8px;
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border-radius: 40px;
+            border: 1px solid var(--border-light);
+            letter-spacing: 0.3px;
             white-space: nowrap;
         }
 
-        .layout-controls {
-            display: flex;
-            gap: 4px;
-            background: var(--bg-secondary);
-            padding: 4px;
-            border-radius: 12px;
-            border: 1px solid var(--border-light);
-            flex: 1;
-            justify-content: center;
-            max-width: fit-content;
-        }
-
-        .layout-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-tertiary);
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+        /* --- LAYOUT SELECTOR NA MESMA LINHA --- */
+        .layout-selector-wrapper {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 8px;
+            background: var(--bg-secondary);
+            padding: 4px;
+            border-radius: 40px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .layout-btn-modern {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 32px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
             cursor: pointer;
             transition: var(--transition-smooth);
+            white-space: nowrap;
         }
 
-        .layout-btn:hover {
-            color: var(--text-primary);
+        .layout-btn-modern svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
+        }
+
+        .layout-btn-modern.active {
             background: var(--bg-elevated);
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .layout-btn.active {
-            background: var(--bg-elevated);
+        .layout-btn-modern:hover {
             color: var(--text-primary);
         }
 
-        /* --- SORT POPOVER --- */
+        /* --- SORT POPOVER MELHORADO --- */
         .sort-popover {
             position: relative;
-            flex: 1;
         }
 
         .sort-options {
@@ -497,13 +516,14 @@
             background: var(--bg-elevated);
             border: 1px solid var(--border-light);
             border-radius: 16px;
-            min-width: 200px;
+            min-width: 220px;
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
             transition: var(--transition-smooth);
             z-index: 50;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
         }
 
         .sort-popover.active .sort-options {
@@ -513,27 +533,26 @@
         }
 
         .sort-option {
-            padding: 12px 16px;
+            padding: 14px 20px;
             color: var(--text-secondary);
             font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
             transition: var(--transition-smooth);
-        }
-
-        .sort-option:first-child {
-            border-radius: 16px 16px 0 0;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .sort-option:last-child {
-            border-radius: 0 0 16px 16px;
+            border-bottom: none;
         }
 
         .sort-option:hover {
             background: var(--bg-secondary);
             color: var(--text-primary);
+            padding-left: 24px;
         }
 
-        /* --- FILTER SIDEBAR COM DROPDOWNS FECHADOS POR PADRÃO --- */
+        /* --- FILTER SIDEBAR --- */
         .products-display {
             max-width: 1400px;
             margin: 0 auto;
@@ -552,6 +571,7 @@
             position: sticky;
             top: 100px;
             transition: var(--transition-smooth);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .filter-sidebar.hidden {
@@ -582,12 +602,14 @@
             user-select: none;
         }
 
-        .filter-header i {
+        .filter-header svg {
             transition: transform 0.3s ease;
             color: var(--text-secondary);
+            width: 18px;
+            height: 18px;
         }
 
-        .filter-header.open i {
+        .filter-header.open svg {
             transform: rotate(180deg);
         }
 
@@ -767,6 +789,7 @@
             border-radius: 40px;
             cursor: pointer;
             font-size: 13px;
+            font-weight: 500;
             transition: var(--transition-smooth);
             margin-top: 20px;
         }
@@ -786,9 +809,15 @@
             width: 100%;
         }
 
-        .products-grid.large { grid-template-columns: repeat(3, 1fr); }
-        .products-grid.medium { grid-template-columns: repeat(4, 1fr); }
-        .products-grid.compact { grid-template-columns: repeat(5, 1fr); }
+        /* LAYOUT MÉDIO - 2 COLUNAS */
+        .products-grid.medium { 
+            grid-template-columns: repeat(2, 1fr); 
+        }
+        
+        /* LAYOUT LISTA - 1 COLUNA */
+        .products-grid.compact { 
+            grid-template-columns: repeat(1, 1fr); 
+        }
 
         .product-card {
             background: var(--bg-secondary);
@@ -810,7 +839,7 @@
             aspect-ratio: 1;
             object-fit: contain;
             background: #FFFFFF;
-            padding: 16px;
+            padding: 20px;
             transition: var(--transition-smooth);
         }
 
@@ -820,13 +849,15 @@
 
         .product-info {
             padding: 16px;
+            text-align: center;
         }
 
         .product-brand {
             color: var(--text-tertiary);
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 0.5px;
+            text-transform: uppercase;
             margin-bottom: 6px;
         }
 
@@ -845,13 +876,43 @@
         .product-price {
             color: var(--text-primary);
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
         .product-collections {
             color: var(--text-tertiary);
             font-size: 11px;
-            margin-top: 6px;
+        }
+
+        /* LAYOUT LISTA */
+        .products-grid.compact .product-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 16px;
+        }
+
+        .products-grid.compact .product-image {
+            width: 100px;
+            height: 100px;
+            padding: 12px;
+            border-radius: 16px;
+        }
+
+        .products-grid.compact .product-info {
+            flex: 1;
+            text-align: left;
+            padding: 8px 8px 8px 0;
+        }
+
+        .products-grid.compact .product-title {
+            font-size: 15px;
+            -webkit-line-clamp: 1;
+        }
+
+        .products-grid.compact .product-price {
+            font-size: 17px;
         }
 
         /* --- OTHER CATEGORY MESSAGE --- */
@@ -869,9 +930,11 @@
             background: var(--bg-secondary);
         }
 
-        .other-category-message i {
+        .other-category-message svg {
             margin-bottom: 20px;
             color: var(--text-tertiary);
+            width: 48px;
+            height: 48px;
         }
 
         .other-category-message p {
@@ -891,9 +954,7 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1200px) {
-            .products-grid.large { grid-template-columns: repeat(2, 1fr) !important; }
-            .products-grid.medium { grid-template-columns: repeat(3, 1fr) !important; }
-            .products-grid.compact { grid-template-columns: repeat(4, 1fr) !important; }
+            .products-grid.medium { grid-template-columns: repeat(2, 1fr) !important; }
         }
 
         @media (max-width: 992px) {
@@ -962,8 +1023,24 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .collection-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .toolbar-left {
+                width: 100%;
+                justify-content: space-between;
+            }
+
             .product-count {
                 display: none;
+            }
+
+            .layout-selector-wrapper {
+                width: 100%;
+                justify-content: center;
             }
 
             .products-display {
@@ -988,9 +1065,7 @@
                 min-height: 350px;
             }
 
-            .products-grid.large,
-            .products-grid.medium,
-            .products-grid.compact {
+            .products-grid.medium {
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 12px !important;
             }
@@ -1007,30 +1082,23 @@
                 font-size: 16px;
             }
 
-            .collection-toolbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
             .toolbar-left {
-                width: 100%;
-                margin-bottom: 4px;
-            }
-
-            .layout-controls {
-                width: 100%;
-                max-width: none;
-                justify-content: center;
+                gap: 8px;
             }
 
             .filter-btn, .sort-btn {
-                padding: 10px 12px;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .layout-btn-modern {
+                padding: 6px 16px;
                 font-size: 12px;
             }
 
-            .layout-btn {
-                width: 36px;
-                height: 36px;
+            .layout-btn-modern svg {
+                width: 16px;
+                height: 16px;
             }
         }
 
@@ -1056,22 +1124,14 @@
                 font-size: 12px;
             }
 
-            .products-grid.large,
-            .products-grid.medium,
-            .products-grid.compact {
+            .products-grid.medium {
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 10px !important;
             }
 
             .filter-btn span,
             .sort-btn span {
-                display: inline-block;
-                font-size: 11px;
-            }
-
-            .filter-btn,
-            .sort-btn {
-                padding: 10px 8px;
+                font-size: 12px;
             }
 
             .wpp-floating {
@@ -1093,18 +1153,20 @@
 
             .filter-btn, .sort-btn {
                 flex: 1 1 calc(50% - 4px);
-                min-width: 120px;
             }
 
-            .layout-controls {
-                margin-top: 4px;
+            .layout-selector-wrapper {
+                width: 100%;
+            }
+
+            .layout-btn-modern {
+                flex: 1;
+                justify-content: center;
             }
         }
 
         @media (max-width: 360px) {
-            .products-grid.large,
-            .products-grid.medium,
-            .products-grid.compact {
+            .products-grid.medium {
                 grid-template-columns: 1fr !important;
             }
 
@@ -1224,17 +1286,17 @@
             </button>
         </div>
 
-        <!-- TOOLBAR - MOBILE NA MESMA LINHA -->
+        <!-- COLLECTION TOOLBAR - TUDO NA MESMA LINHA -->
         <div class="collection-toolbar">
             <div class="toolbar-left">
                 <button class="filter-btn" id="mobileFilterBtn">
-                    <i data-lucide="sliders" size="16"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8h4"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M17 16h4"></path><path d="M19 12V3"></path><path d="M19 21v-5"></path><path d="M3 14h4"></path><path d="M5 10V3"></path><path d="M5 21v-7"></path></svg>
                     <span>Filtrar</span>
                 </button>
 
                 <div class="sort-popover" id="sortPopover">
                     <button class="sort-btn" id="sortButton">
-                        <i data-lucide="arrow-up-down" size="16"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-4 4-4-4"></path><path d="M17 20V4"></path><path d="m3 8 4-4 4 4"></path><path d="M7 4v16"></path></svg>
                         <span>Ordenar</span>
                     </button>
                     <div class="sort-options" id="sortOptions">
@@ -1250,27 +1312,27 @@
                 <span class="product-count" id="productCount">48 produtos</span>
             </div>
 
-            <div class="layout-controls">
-                <button class="layout-btn" data-layout="large" title="Grid grande">
-                    <i data-lucide="grid" size="18"></i>
+            <!-- SELETOR DE LAYOUT NA MESMA LINHA -->
+            <div class="layout-selector-wrapper">
+                <button class="layout-btn-modern active" data-layout="medium" id="btnMedium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M3 9h18"></path><path d="M3 15h18"></path><path d="M9 3v18"></path><path d="M15 3v18"></path></svg>
+                    <span>Médio</span>
                 </button>
-                <button class="layout-btn" data-layout="medium" title="Grid médio">
-                    <i data-lucide="square" size="18"></i>
-                </button>
-                <button class="layout-btn active" data-layout="compact" title="Grid compacto">
-                    <i data-lucide="list" size="18"></i>
+                <button class="layout-btn-modern" data-layout="compact" id="btnCompact">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h.01"></path><path d="M3 12h.01"></path><path d="M3 19h.01"></path><path d="M8 5h13"></path><path d="M8 12h13"></path><path d="M8 19h13"></path></svg>
+                    <span>Lista</span>
                 </button>
             </div>
         </div>
 
         <!-- PRODUCTS DISPLAY -->
         <div class="products-display">
-            <!-- FILTER SIDEBAR - DROPDOWNS FECHADAS POR PADRÃO -->
+            <!-- FILTER SIDEBAR -->
             <aside class="filter-sidebar" id="filterSidebar">
                 <div class="filter-section">
                     <div class="filter-header" data-filter="colecoes">
                         <span>Coleções</span>
-                        <i data-lucide="chevron-down" size="16"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
                     <div class="filter-content" id="filter-colecoes">
                         <div class="collection-list" id="collectionList"></div>
@@ -1280,7 +1342,7 @@
                 <div class="filter-section">
                     <div class="filter-header" data-filter="tamanhos">
                         <span>Tamanhos</span>
-                        <i data-lucide="chevron-down" size="16"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
                     <div class="filter-content" id="filter-tamanhos">
                         <div class="size-list" id="sizeList"></div>
@@ -1290,7 +1352,7 @@
                 <div class="filter-section">
                     <div class="filter-header" data-filter="cores">
                         <span>Cores</span>
-                        <i data-lucide="chevron-down" size="16"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
                     <div class="filter-content" id="filter-cores">
                         <div class="color-grid" id="colorGrid"></div>
@@ -1300,7 +1362,7 @@
                 <div class="filter-section">
                     <div class="filter-header" data-filter="preco">
                         <span>Preço</span>
-                        <i data-lucide="chevron-down" size="16"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                     </div>
                     <div class="filter-content" id="filter-preco">
                         <div class="price-range">
@@ -1317,11 +1379,11 @@
             </aside>
 
             <!-- PRODUCTS GRID -->
-            <div class="products-grid large" id="productsGrid"></div>
+            <div class="products-grid medium" id="productsGrid"></div>
             
             <!-- OTHER CATEGORY MESSAGE -->
             <div class="other-category-message hidden" id="otherCategoryMessage">
-                <i data-lucide="package" size="48"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="2"></rect><path d="M8 2v20"></path><path d="M16 2v20"></path><path d="M2 8h20"></path><path d="M2 16h20"></path></svg>
                 <p>Selecione a categoria<br><span id="selectedCategoryName">Calçados</span><br>para visualizar produtos</p>
             </div>
         </div>
@@ -1408,7 +1470,7 @@
 
         // Variáveis globais
         let filteredProducts = [...products];
-        let currentLayout = 'large';
+        let currentLayout = 'medium';
 
         // Inicializar dropdowns
         function initDropdowns() {
@@ -1499,17 +1561,12 @@
             }
         }
 
-        // FILTER DROPDOWNS - ABRIR/FECHAR AO CLICAR
+        // FILTER DROPDOWNS
         document.querySelectorAll('.filter-header').forEach(header => {
             header.addEventListener('click', function() {
-                // Encontra o conteúdo relacionado
                 const content = this.nextElementSibling;
-                
-                // Alterna classe open no header e no content
                 this.classList.toggle('open');
                 content.classList.toggle('open');
-                
-                // Atualiza ícone (já está sendo rotacionado pelo CSS)
             });
         });
 
@@ -1556,22 +1613,32 @@
             });
         });
 
-        // Layout buttons
-        document.querySelectorAll('.layout-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const grid = document.getElementById('productsGrid');
-                const newLayout = this.dataset.layout;
-                
-                document.querySelectorAll('.layout-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                grid.classList.remove('large', 'medium', 'compact');
-                grid.classList.add(newLayout);
-                currentLayout = newLayout;
-            });
+        // LAYOUT BUTTONS
+        const btnMedium = document.getElementById('btnMedium');
+        const btnCompact = document.getElementById('btnCompact');
+
+        function setActiveLayoutBtn(activeBtn) {
+            document.querySelectorAll('.layout-btn-modern').forEach(btn => btn.classList.remove('active'));
+            activeBtn.classList.add('active');
+        }
+
+        btnMedium.addEventListener('click', function() {
+            const grid = document.getElementById('productsGrid');
+            grid.classList.remove('compact');
+            grid.classList.add('medium');
+            currentLayout = 'medium';
+            setActiveLayoutBtn(this);
         });
 
-        // Coleções (seleção única)
+        btnCompact.addEventListener('click', function() {
+            const grid = document.getElementById('productsGrid');
+            grid.classList.remove('medium');
+            grid.classList.add('compact');
+            currentLayout = 'compact';
+            setActiveLayoutBtn(this);
+        });
+
+        // Coleções
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('collection-link')) {
                 e.preventDefault();
@@ -1581,7 +1648,7 @@
             }
         });
 
-        // Tamanhos (múltipla)
+        // Tamanhos
         document.addEventListener('click', (e) => {
             if (e.target.closest('.size-item')) {
                 const item = e.target.closest('.size-item');
@@ -1590,7 +1657,7 @@
             }
         });
 
-        // Cores (múltipla)
+        // Cores
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('color-swatch')) {
                 e.target.classList.toggle('selected');
@@ -1621,7 +1688,7 @@
             filterProducts();
         });
 
-        // Mobile filter button (abre/fecha sidebar no mobile)
+        // Mobile filter button
         document.getElementById('mobileFilterBtn').addEventListener('click', () => {
             if (window.innerWidth <= 992) {
                 document.getElementById('filterSidebar').classList.toggle('hidden');
